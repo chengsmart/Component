@@ -1,8 +1,7 @@
 # Component
-React components  
 
 ```text  
-dist/
+Component/
 ├── React
 │   ├── common # 通用样式文件
 │   └── file-upload  # file upload component
