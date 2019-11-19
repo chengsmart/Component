@@ -1,0 +1,6 @@
+/* 透明navbar 含js功能，见 framework7.navbarAnimation.js */
+.tmod-transparent-navbar .navbar { background-color: transparent; }
+.tmod-transparent-navbar .navbar .center { color: transparent; }
+.tmod-transparent-navbar .navbar .right a { color: #999; }
+.tmod-transparent-navbar .navbar:after { display: none; }
+.tmod-transparent-navbar .page-content { padding-top: 0; }
