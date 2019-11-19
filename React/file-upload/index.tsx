@@ -66,7 +66,7 @@ const FileUpload = (props: IFileUploadProps) => {
    */
   const suffix = useMemo(() => {
     if (fileUrl && fileName) {
-      const s = getFileSuffix(fileName); // 获得当前文件名的后缀
+      const s = getFileSuffix(fileName).toLowerCase(); // 获得当前文件名的后缀
       return SuffixForImage.indexOf(s) >= 0 ? "image" : s;
     }
     return false;
@@ -91,14 +91,28 @@ const FileUpload = (props: IFileUploadProps) => {
   // 图片上传，上传成功后回调onAfterUpload，用于保存url和name
   const selectFile = async () => {
     const file = refInput.files[0];
-    console.log(file);
     if (!file) {
       // 没有选择图片的情况
       return;
     }
+    const { size, name } = file;
     const fileSuffix = getFileSuffix(file.name);
     if (-1 == SuffixForAll.indexOf(fileSuffix)) {
       Toast.info("上传附件格式错误", 2);
+      return;
+    }
+    // 校验文件名长度
+    const fileRealName = name.substring(
+      name.lastIndexOf("\\") + 1,
+      name.lastIndexOf(".")
+    );
+    if (fileRealName.replace("/[^\x00-\xff]/g", "**").length > 30) {
+      Toast.info("上传文件名过长,请修改后上传", 2);
+      return;
+    }
+    // 校验大小
+    if (size > 50 * 1024 * 1024) {
+      Toast.info("附件过大，压缩到50M以下", 2);
       return;
     }
     // 文件为图片，且需要压缩时候，进行压缩上传
