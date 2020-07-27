@@ -1,0 +1,10 @@
+{
+  "name": "image-base-64",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {},
+  "dependencies": {
+    "exif-js": "2.1.1"
+  },
+  "devDependencies": {}
+}
